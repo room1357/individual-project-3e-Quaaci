@@ -5,8 +5,15 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Kita ambil warna tema utama dari main.dart
+    final Color themeColor = Theme.of(context).colorScheme.primary;
+
     return Scaffold(
-      appBar: AppBar(title: Text('Login'), backgroundColor: Colors.blue),
+      appBar: AppBar(
+        title: Text('Selamat Datang'),
+        backgroundColor: themeColor, // <-- Ganti jadi warna tema
+        foregroundColor: Colors.white, // <-- Biar teksnya putih
+      ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -17,10 +24,10 @@ class LoginScreen extends StatelessWidget {
               width: 100,
               height: 100,
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: themeColor, // <-- Ganti jadi warna tema
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.person, size: 50, color: Colors.white),
+              child: Icon(Icons.wallet, size: 50, color: Colors.white), // <-- Ikon diganti
             ),
             SizedBox(height: 32),
 
@@ -28,7 +35,9 @@ class LoginScreen extends StatelessWidget {
             TextField(
               decoration: InputDecoration(
                 labelText: 'Username',
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12), // <-- Biar lebih modern
+                ),
                 prefixIcon: Icon(Icons.person),
               ),
             ),
@@ -39,7 +48,9 @@ class LoginScreen extends StatelessWidget {
               obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Password',
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12), // <-- Biar lebih modern
+                ),
                 prefixIcon: Icon(Icons.lock),
               ),
             ),
@@ -50,11 +61,17 @@ class LoginScreen extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // Handle login
+                  // <-- INI DIA EDITNYA: Pindah ke halaman '/home'
+                  // Kita pakai pushReplacementNamed agar pengguna tidak bisa "back" ke login
+                  Navigator.pushReplacementNamed(context, '/home');
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: themeColor, // <-- Ganti jadi warna tema
+                  foregroundColor: Colors.white, // <-- Teks tombol jadi putih
                   padding: EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12), // <-- Biar lebih modern
+                  ),
                 ),
                 child: Text(
                   'LOGIN',
@@ -68,12 +85,16 @@ class LoginScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Don't have an account? "),
+                Text("Belum punya akun?"), // <-- Ganti Bahasa
                 TextButton(
                   onPressed: () {
-                    // Navigate to register
+                    // <-- INI DIA EDITNYA: Pindah ke halaman '/register'
+                    Navigator.pushNamed(context, '/register');
                   },
-                  child: Text('Register'),
+                  child: Text(
+                    'Daftar di sini', // <-- Ganti Bahasa
+                    style: TextStyle(color: themeColor), // <-- Ganti warna link
+                  ),
                 ),
               ],
             ),
